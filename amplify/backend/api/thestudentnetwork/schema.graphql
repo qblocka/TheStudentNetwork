@@ -1,0 +1,15 @@
+type Todo @model {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type User @model
+  @auth(rules: [
+    { allow: groups, groups: ["Students"] },
+    { allow: owner, ownerField: "username", operations: [read] },
+  ]) {
+    id: ID!
+    username: String!
+    email: String!
+  }

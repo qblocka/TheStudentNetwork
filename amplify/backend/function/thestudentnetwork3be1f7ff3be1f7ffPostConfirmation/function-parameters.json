@@ -1,0 +1,18 @@
+{
+  "trigger": true,
+  "modules": [
+    "add-to-group"
+  ],
+  "parentResource": "thestudentnetwork3be1f7ff3be1f7ff",
+  "functionName": "thestudentnetwork3be1f7ff3be1f7ffPostConfirmation",
+  "resourceName": "thestudentnetwork3be1f7ff3be1f7ffPostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "C:\\Users\\alexb\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "triggerEventPath": "PostConfirmation.event.json",
+  "roleName": "thestudentnetwork3be1f7ff3be1f7ffPostConfirmation",
+  "skipEdit": true,
+  "GROUP": "",
+  "enableCors": false
+}
