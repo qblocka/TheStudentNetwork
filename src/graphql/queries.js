@@ -36,6 +36,7 @@ export const getUser = /* GraphQL */ `
       id
       username
       email
+      course
       createdAt
       updatedAt
     }
@@ -52,6 +53,7 @@ export const listUsers = /* GraphQL */ `
         id
         username
         email
+        course
         createdAt
         updatedAt
       }
