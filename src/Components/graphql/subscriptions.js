@@ -7,6 +7,7 @@ export const onCreateTodo = /* GraphQL */ `
       id
       name
       description
+      course
       createdAt
       updatedAt
     }
@@ -18,6 +19,7 @@ export const onUpdateTodo = /* GraphQL */ `
       id
       name
       description
+      course
       createdAt
       updatedAt
     }
@@ -29,6 +31,7 @@ export const onDeleteTodo = /* GraphQL */ `
       id
       name
       description
+      course
       createdAt
       updatedAt
     }
@@ -65,6 +68,42 @@ export const onDeleteUser = /* GraphQL */ `
       username
       email
       course
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateMessage = /* GraphQL */ `
+  subscription OnCreateMessage {
+    onCreateMessage {
+      id
+      channelID
+      author
+      body
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateMessage = /* GraphQL */ `
+  subscription OnUpdateMessage {
+    onUpdateMessage {
+      id
+      channelID
+      author
+      body
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteMessage = /* GraphQL */ `
+  subscription OnDeleteMessage {
+    onDeleteMessage {
+      id
+      channelID
+      author
+      body
       createdAt
       updatedAt
     }

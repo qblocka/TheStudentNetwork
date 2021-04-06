@@ -6,15 +6,19 @@ import {Auth} from 'aws-amplify';
 import styles from './App.css';
 
 // GRAGH QL RELATED
-import {updateTodo, updateUser} from './Components/graphql/mutations'
-import {listTodos,listUsers} from './Components/graphql/queries'
+import {updateTodo, updateUser} from './graphql/mutations'
+import {listTodos,listUsers} from './graphql/queries'
 
-// MENU RELATED
+// Pages
 import {Route, BrowserRouter as Router, Switch, Link} from "react-router-dom"
-import editProfile from "./Components/pages/editProfile";
-import profile from "./Components/pages/Profile";
+import noticeBoard from "./pages/noticeBoard";
+import profile from "./pages/Profile";
+
+// Tabs
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+
+// Menu
 /*import { slide as Menu } from 'react-burger-menu'*/
 
 Amplify.configure(awsExports);
@@ -26,15 +30,15 @@ const App = () => {
     const [names, setNames] = useState([])
     const [users, setUsers] = useState([])
     const [search, setSearch] = useState([])
-/*
-    const [searches, setSearches] = useState([])
-*/
+    /*
+        const [searches, setSearches] = useState([])
+    */
 
     useEffect(() => {
 
         fetchEvents()
         fetchUsers()
-       // setFormState(users[0]) dont leave that in loool il submit some code that dont even work lol ahhaha
+        // setFormState(users[0]) dont leave that in loool il submit some code that dont even work lol ahhaha
     }, [])
 
     function setInput(key, value) {
@@ -65,16 +69,16 @@ const App = () => {
 
     async function fetchUsers() {
         //while (users.length<1) {
-            try {
-                let auth = await Auth.currentUserInfo();
-                let user = auth.attributes.sub.toString();
-                //alert(user)
-                const userData = await API.graphql(graphqlOperation(listUsers, {filter: {id: {eq: user}}}))
-                const userItems = userData.data.listUsers.items;
-                setUsers(userItems)
-            } catch (err) {
-                console.log('error fetching todos')
-            }
+        try {
+            let auth = await Auth.currentUserInfo();
+            let user = auth.attributes.sub.toString();
+            //alert(user)
+            const userData = await API.graphql(graphqlOperation(listUsers, {filter: {id: {eq: user}}}))
+            const userItems = userData.data.listUsers.items;
+            setUsers(userItems)
+        } catch (err) {
+            console.log('error fetching todos')
+        }
         //}
 
     }
@@ -100,7 +104,7 @@ const App = () => {
                 id : user.attributes.sub.toString(),
                 course: formState.course
             };
-             await API.graphql(graphqlOperation(updateUser,{input: userDetails}))
+            await API.graphql(graphqlOperation(updateUser,{input: userDetails}))
             fetchUsers();
         } catch (err) {
             console.log('error creating event:', err)
@@ -108,21 +112,19 @@ const App = () => {
     }
 
     return (
-
         <AmplifyAuthenticator>
-
             <div className={"container"}>
                 <Router>
                     <nav>
                         <Tabs>
                             <TabList>
-                                <Tab><Link to="/Profile"><div className={"button"}>Profile</div></Link></Tab>
-                                <Tab><Link to="/editProfile" ><div className={"button"} >Edit Profile</div></Link></Tab>
+                                <Tab><Link to="/noticeBoard"><div className={"button"}>Notice Board</div></Link></Tab>
+                                <Tab><Link to="/Profile" ><div className={"button"} >Profile</div></Link></Tab>
                             </TabList>
                             <TabPanel>
                                 <h1>Profile Picture (Here)</h1>
                                 {
-                                users.map((user, index) => (
+                                    users.map((user, index) => (
                                         <div key={user.id ? user.id : index} className={"todo"}>
                                             <p className={"todoName"}>{"Username : ".concat(user.username)}</p>
                                             <p className={"todoDescription"}>{"Email : ".concat(user.email)}</p>
@@ -157,8 +159,6 @@ const App = () => {
                     </nav>
                     <Switch>
                         <Route path="/Profile" component= {profile} render={()=>fetchUsers()} />
-
-                        <Route path="/editProfile" component= {editProfile}/>
                     </Switch>
                 </Router>
                 <input

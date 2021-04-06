@@ -2,6 +2,7 @@ type Todo @model {
   id: ID!
   name: String!
   description: String
+  course: String
 }
 
 type User @model
@@ -14,3 +15,13 @@ type User @model
     email: String!
     course: String!
   }
+
+type Message @model
+@key(name: "byChannelID", fields: ["channelID", "createdAt"], queryField: "messagesByChannelID"){
+  id: ID!
+  channelID: ID!
+  author: String!
+  body: String!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
